@@ -8,10 +8,20 @@ import {
 } from "react-native";
 import React from "react";
 import LottieView from "lottie-react-native";
+import { deleteItem } from "../../utils/storage";
+import { useNavigation } from "@react-navigation/core";
 
 const { width, height } = Dimensions.get("window");
 
-const HomeScreen = () => {
+
+
+const HomeScreen =  () => {
+  const navigation = useNavigation();
+
+  const handleReset = async () => {
+    await deleteItem("onBoarded");
+    navigation.navigate("OnBoardingScreen");
+  };
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.lottie}>
@@ -24,7 +34,7 @@ const HomeScreen = () => {
       </View>
 
       <Text style={styles.text}>Home Page</Text>
-      <TouchableOpacity style={styles.resetButton}>
+      <TouchableOpacity onPress={handleReset} style={styles.resetButton}>
         <Text>Reset</Text>
       </TouchableOpacity>
     </SafeAreaView>

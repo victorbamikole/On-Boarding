@@ -9,18 +9,20 @@ import React from "react";
 import Onboarding from "react-native-onboarding-swiper";
 import LottieView from "lottie-react-native";
 import { useNavigation } from "@react-navigation/native";
+import { setItem } from "../../utils/storage";
 
 const { width, height } = Dimensions.get("window");
 const OnBoardingScreen = () => {
   const navigation = useNavigation();
   const handleDone = () => {
+    setItem("onBoarded", "1");
     navigation.navigate("Home");
   };
 
   const doneButton = ({ ...props }) => {
     return (
       <TouchableOpacity style={styles.doneButton} {...props}>
-        <Text style={{alignItems: 'center'}}>Done</Text>
+        <Text style={{ alignItems: "center" }}>Done</Text>
       </TouchableOpacity>
     );
   };
@@ -106,6 +108,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     justifyContent: "center",
     alignItems: "center",
-    width: 100
+    width: 100,
   },
 });
